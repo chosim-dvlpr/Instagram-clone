@@ -16,5 +16,5 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
-    path('instagram/', include('apps.urls')),
+    path('instagram/', include('apps.urls')),       # 따로 app을 생성하여 전달해줌
 ]
