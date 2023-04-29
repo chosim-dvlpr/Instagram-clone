@@ -41,6 +41,41 @@
         margin: 10px;
         height: 480px;
     }
+
+    .feed_img {
+        width: 100%;
+        object-fit: contain; 
+        <!-- 콘텐츠 크기를 어떻게 조절할 것인지 지정 -->
+    }
+
+    .feed_content {
+        padding: 0px 10px;
+    }
+
+    .feed_like {
+        padding: 0px 10px;
+    }
+
+    .feed_reply {
+        padding: 0px 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .feed_txt {
+        font-size: 14px;
+    }
+
+    .feed_icon {
+        padding: 5px 5px 0px 5px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    span {
+        padding-right: 5px;
+    }
+
 </style>
 <body>
     <!-- 상단 네비게이션 바 -->
@@ -63,19 +98,26 @@
     <div class="main_body">
         <div class="left_body">
             <div class="border feed_box">
-                컨텐츠1
-            </div>
-            <div class="border feed_box">
-                컨텐츠2
-            </div>
-            <div class="border feed_box">
-                컨텐츠3
-            </div>
-            <div class="border feed_box">
-                컨텐츠4
-            </div>
-            <div class="border feed_box">
-                컨텐츠5
+                <img class="feed_img" src="https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg" alt="cat">
+                <div class="feed_icon">
+                    <div>
+                        <span class="material-icons-outlined">favorite_border</span>
+                        <span class="material-icons-outlined">mode_comment</span>
+                        <span class="material-icons-outlined">send</span>
+                    </div>
+                    <div>
+                        <p class="material-icons-outlined">turned_in_out</p>
+                    </div>
+                </div>
+                <div class="feed_like">
+                    <p class="feed_txt"><b>좋아요 10개</b></p>
+                </div>
+                <div class="feed_content">
+                    <p class="feed_txt"><b>minji_instagram</b> 고양이는 귀여워</p>
+                </div>
+                <div class="feed_reply">
+                    <span class="feed_txt"><b>mymy</b> 강아지도 귀여워</span>
+                </div>
             </div>
         </div>
 
