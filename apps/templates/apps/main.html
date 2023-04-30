@@ -17,6 +17,7 @@
         padding-top: 50px;
     }
 
+
     .left_body {
         background-color: blue;
         margin-right: 100px;
@@ -25,6 +26,7 @@
         display: flex;
         flex-direction: column;
     }
+
 
     .right_body {
         background-color: yellow;
@@ -42,19 +44,23 @@
         height: 480px;
     }
 
+
     .feed_img {
         width: 100%;
         object-fit: contain; 
         <!-- 콘텐츠 크기를 어떻게 조절할 것인지 지정 -->
     }
 
+
     .feed_content {
         padding: 0px 10px;
     }
 
+
     .feed_like {
         padding: 0px 10px;
     }
+
 
     .feed_reply {
         padding: 0px 10px;
@@ -62,9 +68,11 @@
         flex-direction: column;
     }
 
+
     .feed_txt {
         font-size: 14px;
     }
+
 
     .feed_icon {
         padding: 5px 5px 0px 5px;
@@ -72,8 +80,38 @@
         justify-content: space-between;
     }
 
+
     span {
         padding-right: 5px;
+    }
+
+
+    .feed_name {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+
+    .feed_name_txt {
+        font-size: 14px;
+        padding: 0px 10px;
+        font-weight: bold;
+    }
+
+
+    .profile_box {
+        width: 40px;
+        height: 40px;
+        border-radius: 70%;
+        overflow: hidden;
+    }
+
+
+    .profile_img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
 </style>
@@ -98,6 +136,12 @@
     <div class="main_body">
         <div class="left_body">
             <div class="border feed_box">
+                <div class="feed_name">
+                    <div class="profile_box">
+                        <img class="profile_img" src="https://imagesvc.meredithcorp.io/v3/mm/image?q=60&c=sc&poi=%5B900%2C533%5D&w=2000&h=1333&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F03%2F12%2Fpomeranian-white-puppy-921029690-2000.jpg" alt="dog">
+                    </div>
+                    <span class="feed_name_txt"> minji_instagram</span>
+                </div>
                 <img class="feed_img" src="https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg" alt="cat">
                 <div class="feed_icon">
                     <div>
