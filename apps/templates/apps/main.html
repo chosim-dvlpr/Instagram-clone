@@ -173,16 +173,6 @@
 
 </style>
 <body>
-    <!-- test -->
-    {% for feed in feed_list %}
-        <p>{{ feed.id }}</p>
-        <p>{{ feed.image }}</p>
-        <p>{{ feed.content }}</p>
-        <p>{{ feed.profile_image }}</p>
-        <p>{{ feed.user_id }}</p>
-        <p>{{ feed.like_count }}</p>
-    {% endfor %}
-
     <!-- 상단 네비게이션 바 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%; height: 50px; position: fixed;">
         <div class="container-fluid">
@@ -202,14 +192,15 @@
     <!-- 본문 영역 -->
     <div class="main_body">
         <div class="left_body">
+            {% for feed in feed_list %}
             <div class="border feed_box">
                 <div class="feed_name">
                     <div class="profile_box">
-                        <img class="profile_img" src="https://imagesvc.meredithcorp.io/v3/mm/image?q=60&c=sc&poi=%5B900%2C533%5D&w=2000&h=1333&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F03%2F12%2Fpomeranian-white-puppy-921029690-2000.jpg" alt="dog">
+                        <img class="profile_img" src="{{ feed.profile_image }}">
                     </div>
-                    <span class="feed_name_txt"> minji_instagram</span>
+                    <span class="feed_name_txt"> {{ feed.user_id }}</span>
                 </div>
-                <img class="feed_img" src="https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg" alt="cat">
+                <img class="feed_img" src="{{ feed.image }}">
                 <div class="feed_icon">
                     <div>
                         <span class="material-icons-outlined">favorite_border</span>
@@ -221,44 +212,16 @@
                     </div>
                 </div>
                 <div class="feed_like">
-                    <p class="feed_txt"><b>좋아요 10개</b></p>
+                    <p class="feed_txt"><b>좋아요 {{ feed.like_count }}개</b></p>
                 </div>
                 <div class="feed_content">
-                    <p class="feed_txt"><b>minji_instagram</b> 고양이는 귀여워</p>
+                    <p class="feed_txt"><b>{{ feed.user_id }}</b> {{ feed.content }}</p>
                 </div>
                 <div class="feed_reply">
                     <span class="feed_txt"><b>mymy</b> 강아지도 귀여워</span>
                 </div>
             </div>
-
-            <div class="border feed_box">
-                <div class="feed_name">
-                    <div class="profile_box">
-                        <img class="profile_img" src="https://imagesvc.meredithcorp.io/v3/mm/image?q=60&c=sc&poi=%5B900%2C533%5D&w=2000&h=1333&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F03%2F12%2Fpomeranian-white-puppy-921029690-2000.jpg" alt="dog">
-                    </div>
-                    <span class="feed_name_txt"> minji_instagram</span>
-                </div>
-                <img class="feed_img" src="https://img.freepik.com/free-photo/adorable-kitty-looking-like-it-want-to-hunt_23-2149167099.jpg?w=2000" alt="cat">
-                <div class="feed_icon">
-                    <div>
-                        <span class="material-icons-outlined">favorite_border</span>
-                        <span class="material-icons-outlined">mode_comment</span>
-                        <span class="material-icons-outlined">send</span>
-                    </div>
-                    <div>
-                        <p class="material-icons-outlined">turned_in_out</p>
-                    </div>
-                </div>
-                <div class="feed_like">
-                    <p class="feed_txt"><b>좋아요 8개</b></p>
-                </div>
-                <div class="feed_content">
-                    <p class="feed_txt"><b>minji_instagram</b> 고양이는 귀여워</p>
-                </div>
-                <div class="feed_reply">
-                    <span class="feed_txt"><b>mymy</b> 강아지도 귀여워</span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
         <!-- 오른쪽 영역 - 스크롤 상관없이 고정시킴 -->
@@ -266,7 +229,7 @@
             <div class="feed_name" style="justify-content: space-between">
                 <div style="display: flex; align-items: center;">
                     <div class="big_profile_box">
-                        <img class="profile_img" src="https://imagesvc.meredithcorp.io/v3/mm/image?q=60&c=sc&poi=%5B900%2C533%5D&w=2000&h=1333&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F03%2F12%2Fpomeranian-white-puppy-921029690-2000.jpg" alt="dog">                    </div>
+                        <img class="profile_img" src="https://img.hankyung.com/photo/202206/BF.30250411.1.jpg" alt="dog">                    </div>
                     <div class="name_content">
                         <span class="feed_name_txt">minji_instagram</span>
                         <span class="name_content_txt">Minji</span>
