@@ -326,11 +326,23 @@
 
     <!-- Javascript -->
     <script>
+        // modal 화면에 띄우기
         const modal = document.getElementById('modal_add_feed')
         const buttonAddFeed = document.getElementById('add_feed')
         buttonAddFeed.addEventListener('click', event => {
             modal.style.display = "flex" // modal을 화면에 보이도록 만들기
             document.body.style.overflowY = "hidden" // 스크롤 못하도록 고정
+        })
+        // overflow : 내용이 박스보다 더 길 때 어떻게 보일지 선택함.
+        // overflowY : 세로 길이가 더 길 때 어떻게 보일지 선택
+        // visible : 특정 요소가 박스를 넘어가더라도 그대로 보여줌 (default)
+        // hidden : 부모요소를 넘어가는 자식요소 부분은 보이지 않도록 함 (Y축 스크롤바 없음)
+
+        // modal close
+        const buttonCloseModal = document.getElementById('close_modal')
+        buttonCloseModal.addEventListener('click', event => {
+            modal.style.display = 'none'
+            document.body.style.overflowY = 'visible'
         })
 
     </script>
