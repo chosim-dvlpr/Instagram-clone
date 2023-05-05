@@ -179,7 +179,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -210,7 +210,7 @@
             <div>
                 <span class="material-icons">home</span>
                 <span class="material-icons">send</span>
-                <span class="material-icons-outlined">add_box</span>
+                <span id="add_feed" class="material-icons-outlined">add_box</span>
                 <span class="material-icons-outlined">explore</span>
                 <span class="material-icons-outlined">favorite_border</span>
             </div>
@@ -299,11 +299,22 @@
     </div>
 
     <!-- 모달 -->
-    <div class="modal_overlay">
+    <div id="modal_add_feed" class="modal_overlay">
         <div class="modal_window">
 
         </div>
     </div>
+
+    <!-- Javascript -->
+    <script>
+        const modal = document.getElementById('modal_add_feed')
+        const buttonAddFeed = document.getElementById('add_feed')
+        buttonAddFeed.addEventListener('click', event => {
+            modal.style.display = "flex" // modal을 화면에 보이도록 만들기
+            document.body.style.overflowY = "hidden" // 스크롤 못하도록 고정
+        })
+
+    </script>
 
     <!-- Bootstrap CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
