@@ -330,8 +330,11 @@
         const modal = document.getElementById('modal_add_feed')
         const buttonAddFeed = document.getElementById('add_feed')
         buttonAddFeed.addEventListener('click', event => {
+            modal.style.top = window.pageYOffset + 'px' // 시작 y좌표를 바꿈 - 스크롤 내려도 정확한 위치에 모달이 뜸
             modal.style.display = "flex" // modal을 화면에 보이도록 만들기
             document.body.style.overflowY = "hidden" // 스크롤 못하도록 고정
+            
+            // console.log(window.pageYOffset + '위치') // 모달 위치 확인
         })
         // overflow : 내용이 박스보다 더 길 때 어떻게 보일지 선택함.
         // overflowY : 세로 길이가 더 길 때 어떻게 보일지 선택
