@@ -176,7 +176,7 @@
 
 
     /* modal */
-    .modal_overlay {
+    .modal {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -209,11 +209,13 @@
         justify-content: space-between;
         font-weight: bold;
         font-size: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.18);
     }
 
     .modal_title_side {
         flex: 0 0 40px;
         text-align: center;
+        margin: 5px;
     }
 
     /* modal - 이미지 업로드 */
@@ -225,6 +227,38 @@
         width: 780px;
         height: 548px;
         display: flex;
+    }
+
+    @media screen and (max-width: 1280px) {
+        .right_body {
+            display: none;
+        }
+    }
+
+    .modal_image_upload_content {
+        outline: 2px dashed black;
+        outline-offset: -10px;
+        text-align: center;
+        transition: all .15s ease-in-out;
+        width: 500px;
+        height: 548px;
+    }
+
+    .modal_image_content {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .modal_content_write{
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid rgba(0, 0, 0, 0.18);;
+    }
+
+    .feed_content_textarea{
+        resize: none;
+        width: 294px;
+        border: none;
     }
 
 </style>
@@ -326,7 +360,7 @@
     </div>
 
     <!-- 모달 -->
-    <div id="modal_add_feed" class="modal_overlay">
+    <div id="modal_add_feed" class="modal">
         <div class="modal_window">
             <div class="modal_title">
                 <div class="modal_title_side"></div>
@@ -337,6 +371,38 @@
             </div>
             <div class="modal_image_upload">
                 <div style="margin: auto;">사진을 여기에 끌어다 놓으세요.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal_overlay_content" id="modal_add_feed_content">
+        <div class="modal_window">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div style="margin: 5px;">새 게시물</div>
+                <div class="modal_title_side">
+                    <span class="close_modal material-icons-outlined" id="close_modal">close</span>
+                </div>
+            </div>
+            <div class="modal_image_content">
+                <div class="modal_image_upload_content" id="input_image">
+
+                </div>
+                <div class="modal_content_write">
+                    <div class="feed_name">
+                        <div class="profile_box">
+                            <img src="{{ feed.profile_image }}" class="profile_img" id="input_profile_image">
+                        </div>
+                        <span class="feed_name_txt" id="input_user_id">minji_instagram</span>
+                    </div>
+                    <div style="height: 440px;">
+                        <!-- textarea : 내용을 작성할 수 있는 부분 -->
+                        <textarea id="input_content" class="feed_content_textarea form-control col-sm-5" rows="10" placeholder="설명을 입력하세요."></textarea>
+                    </div>
+                    <div style="width: 100%; text-align: center;">
+                        <button id="button_write_feed" type="button" class="btn btn-primary" style="width: 268px;">공유하기</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -403,10 +469,18 @@
 
             // 파일이 이미지 형식이거나 아닐 때
             if (files[0].type.match(/image.*/)) {
-                $(event.target).css({
+                $('#modal_add_feed_content').css({ // 이미지가 업로드되면 content작성 부분을 보여지도록 함
+                    display: 'flex'
+                })
+                $('.modal_image_upload_content').css({
                     'background-image' : 'url(' + window.URL.createObjectURL(files[0]) + ')',
                     'outline': 'none',
-                    'background-size' : '100% 100%'
+                    'background-size' : 'contain',
+                    "background-repeat" : "no-repeat",
+                    "background-position" : "center"
+                })
+                $('#modal_add_feed').css({
+                    display: 'none'
                 })
             } else {
                 alert('이미지를 올려주세요.')
@@ -414,6 +488,68 @@
             }
         }
 
+        // 데이터 모으기
+        // input에 작성한 글과 이미지, 작성자 정보를 jquery로 가져옴
+        // => AJAX 이용하여 views.py에 만든 함수로 보냄
+        $('#button_write_feed').on('click', ()=>{
+            const image = $('#input_image').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1')
+            const content = $('#input_content').val()
+            const profile_image = $('#input_profile_image').attr('src')
+            const user_id = $('#input_user_id').text()
+    
+            const file = files[0]
+    
+            let fd = new FormData()
+    
+            fd.append('file', file)
+            fd.append('image', image)
+            fd.append('content', content)
+            fd.append('profile_image', profile_image)
+            fd.append('user_id', user_id)
+    
+            if(image.length <= 0)
+            {
+                alert("이미지가 비어있습니다.")
+            }
+            else if(content.length <= 0)
+            {
+                alert("설명을 입력하세요")
+            }
+            else if(profile_image.length <= 0)
+            {
+                alert("프로필 이미지가 비어있습니다.")
+            }
+            else if(user_id.length <= 0)
+            {
+                alert("사용자 id가 없습니다.")
+            }
+            else{
+                writeFeed(fd)
+                console.log(files[0])
+            }
+        })
+    
+        function writeFeed(formdata) {    // ajax로 데이터를 서버에 보내기 - json형식으로 보냄
+            $.ajax({
+                url: "/content/upload",
+                data: formdata,
+                method: "POST",
+                processData: false,
+                contentType: false,
+
+                success: function (data) { // 성공 후 실행되는 callback 함수
+                    console.log("성공")
+                },
+                error: function (request, status, error) { // 실패 후 실행됨
+                    console.log("에러")
+                },
+                complete: function() { // 성공이든 실패든 요청이 끝나면 무조건 실행
+                    console.log("무조건실행")
+                    closeModal()       // 모달 창 닫기
+                    location.reload()  // 업로드한 피드를 메인에서 확인할 수 있도록 새로고침
+                }
+            })
+        };
     </script>
 
     <!-- Bootstrap CDN -->
