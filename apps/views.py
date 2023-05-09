@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .models import Feed
 from rest_framework.response import Response
-import os
-from .settings import MEDIA_ROOT
+from instagram.settings import MEDIA_ROOT
+from .models import Feed
 from uuid import uuid4
+import os
 
 
 
