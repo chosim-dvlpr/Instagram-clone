@@ -366,7 +366,7 @@
                 <div class="modal_title_side"></div>
                 <div>새 게시물</div>
                 <div class="modal_title_side">
-                    <span id="close_modal" class="material-icons-outlined">close</span>
+                    <span id="close_modal" class="close_modal material-icons-outlined">close</span>
                 </div>
             </div>
             <div class="modal_image_upload">
@@ -381,7 +381,7 @@
                 <div class="modal_title_side"></div>
                 <div style="margin: 5px;">새 게시물</div>
                 <div class="modal_title_side">
-                    <span class="close_modal material-icons-outlined" id="close_modal">close</span>
+                    <span class="close_modal material-icons-outlined" id="close_modal_sec">close</span>
                 </div>
             </div>
             <div class="modal_image_content">
@@ -391,7 +391,7 @@
                 <div class="modal_content_write">
                     <div class="feed_name">
                         <div class="profile_box">
-                            <img src="{{ feed.profile_image }}" class="profile_img" id="input_profile_image">
+                            <img src="https://img.hankyung.com/photo/202206/BF.30250411.1.jpg" class="profile_img" id="input_profile_image">
                         </div>
                         <span class="feed_name_txt" id="input_user_id">minji_instagram</span>
                     </div>
@@ -430,6 +430,14 @@
             modal.style.display = 'none'
             document.body.style.overflowY = 'visible'
         })
+
+        const modal_content = document.getElementById('modal_add_feed_content')
+        const buttonCloseModalSec = document.getElementById('close_modal_sec')
+        buttonCloseModalSec.addEventListener('click', event => {
+            modal_content.style.display = 'none'
+            document.body.style.overflowY = 'visible'
+        })
+
 
         
         // jquery
